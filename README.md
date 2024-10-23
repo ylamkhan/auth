@@ -1,4 +1,4 @@
-#Django Authentication By Rest Framework
+# Django Authentication By Rest Framework
 
 The Django Rest Framework (DRF) is a powerful and flexible toolkit for building Web APIs (Application Programming Interfaces) using Django. It extends the capabilities of the Django web framework to make it easier to develop RESTful APIs, which allow your application to expose data and services to other systems in a standardized format, typically JSON.
 
