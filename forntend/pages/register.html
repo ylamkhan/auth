@@ -1,0 +1,25 @@
+<div style="position: relative; width: 600px; height: 700px;">
+    <div id="container" style="position: absolute; width: 600px; height: 700px;">
+        <h1>Register In PingPong Game</h1>
+        <form id="register-form">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" autocomplete="on" required>
+
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" autocomplete="on" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" autocomplete="on" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" autocomplete="off" required>
+
+            <label for="confirm-password">Password Confirm:</label>
+            <input type="password" id="confirm-password" name="confirm-password" autocomplete="off" required>
+
+            <button id="submit">Register</button>
+        </form>
+        <div id="register-message"></div>
+    </div>
+    <canvas id="canvas" style="width: 600px; height: 700px;"></canvas>
+</div>

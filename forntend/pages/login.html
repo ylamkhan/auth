@@ -1,0 +1,31 @@
+<div id="container-login">
+    <h1>Login to PingPong Game</h1>
+    <form id="login-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" autocomplete="off" required >
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"  autocomplete="off" required >
+
+        <div class="reset-password">
+            <a href="/reset-password/">reset-password ?</a>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <!-- Social login buttons -->
+    <div class="social-login">
+        <p>Or login with</p>
+        <a href="#" id="google-login">
+            <img src="images/google.png" alt="Google Login" class="social-icon">
+        </a>
+        <a href="#" id="intra42-login">
+            <img src="images/42.png" alt="Intra42 Login" class="social-icon">
+        </a>
+    </div>
+
+    <!-- Reset password link -->
+
+    <div id="login-message"></div>
+</div>

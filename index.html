@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column; /* Stack elements vertically */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;   /* Full viewport height */
+            margin: 0;
+        }
+
+        #container {
+            padding: 20px;
+            background: linear-gradient(to right bottom, rgba(51, 42, 42, 0.4), rgba(255, 255, 255, 0.2));
+            backdrop-filter: blur(1rem);
+            border-radius: 2rem;
+            box-shadow: 0 0 2rem #00ff00;
+            width: 300px; /* Fixed width for the registration form */
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ff00;
+            margin: 0; /* Remove margin */
+        }
+
+        canvas {
+            /* background: linear-gradient(to right bottom, rgba(51, 42, 42, 0.4), rgba(255, 255, 255, 0.2));
+            backdrop-filter: blur(1rem); */
+            width: 600px; /* Same width as the container */
+            height: 700px; /* Fixed height for the canvas */
+            margin-top: 20px; /* Space between form and canvas */
+        }
+
+        h1 {
+    text-align: center;
+    color: #00ff00;
+    margin: 0; /* Remove margin */
+}
+
+canvas {
+    background-color: rgb(0, 0, 0);
+    width: 300px; /* Same width as the container */
+    height: 200px; /* Fixed height for the canvas */
+    margin-top: 20px; /* Space between form and canvas */
+}
+
+
+
+#container-login {
+    /* background-color: #43e3f8; */
+    padding: 20px;
+    /* border-radius: 10px; */
+    /* box-shadow: 0 0 10px rgba(3, 7, 248, 0.1); */
+    /* width: 500px; */
+    /* background: white; */
+    background: linear-gradient(to right bottom, rgb(51 42 42 / 40%), rgb(255 255 255 / 20%));
+    backdrop-filter: blur(1rem);
+    width: 40%;
+    height: 60%;
+    z-index: 1;
+    border-radius: 2rem;
+    box-shadow: 0 0 2rem #00ff00;
+    
+}
+
+h1 {
+    /* text-align: center;
+    color: #00ff00;
+    margin: auto; */
+    /* background-color: #000000;
+    margin: 0; */
+}
+
+label {
+    display: block;
+    padding-top: 15px;
+    margin-top: 10px;
+    color: #c4bfda;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+input {
+    display: block;
+    width: 90%;
+    padding: 17px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border: 0.12rem solid #1df501;;
+    border-radius: 15px;
+    background-color: #3d3939 !important;
+    color: white;
+    font-size: 18px; 
+}
+
+button {
+    width: 25%;
+    padding: 15px;
+    background-color: #1df501;
+    /* text-align: center; */
+    margin-left: 33%;
+    border: none;
+    border-radius: 15px;
+    color: rgb(0 0 0);
+    font-size: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 2rem #014701;
+}
+
+button:hover {
+    background-color: #058505;
+}
+
+#register-message, #login-message {
+    margin-top: 10px;
+    color: red;
+    text-align: center;
+}
+    </style>
+</head>
+<body style="margin: 0;">
+    <div style="position: relative; width: 600px; height: 700px;">
+        <div id="container" style="position: absolute; width: 600px; height: 700px;">
+            <h1>Register In PingPong Game</h1>
+            <form id="register-form">
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" autocomplete="on" required>
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" autocomplete="on" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" autocomplete="on" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" autocomplete="off" required>
+
+                <label for="confirm-password">Password Confirm:</label>
+                <input type="password" id="confirm-password" name="confirm-password" autocomplete="off" required>
+
+                <button id="submit">Register</button>
+            </form>
+            <div id="register-message"></div>
+        </div>
+        <canvas id="canvas" style="width: 600px; height: 700px;"></canvas>
+    </div>
+
+    <script>
+        // Function to setup canvas
+        function setupCanvas() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas size to match CSS size
+            canvas.width = 700; // Fixed width for canvas
+            canvas.height = 700; // Fixed height for canvas
+
+            const balls = [];
+            const numBalls = 20;
+
+            function createBall() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: 15,
+                    speedX: (Math.random() * 6) + 2,
+                    speedY: (Math.random() * 6) + 2  
+                };
+            }
+            
+            for (let i = 0; i < numBalls; i++) {
+                balls.push(createBall());
+            }
+            function drawBalls() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Define an array of colors
+                const colors = ['#fff', '#058505', '#ff0000', '#0000ff', '#ffff00', '#00ffff', '#ff00ff', '#ff8000'];
+                
+                balls.forEach((ball, i) => { // Use index `i` in the forEach
+                    ctx.beginPath();
+                    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                    
+                    // Select color based on the index
+                    ctx.fillStyle = colors[i % colors.length]; // Cycle through the colors
+                    ctx.fill();
+                    ctx.closePath();
+                });
+            }
+
+
+
+            function moveBalls() {
+                balls.forEach(ball => {
+                    ball.x += ball.speedX;
+                    ball.y += ball.speedY;
+
+                    // Bounce off the walls
+                    if (ball.x + ball.radius >= canvas.width) {
+                        ball.x = canvas.width - ball.radius;
+                        ball.speedX = -ball.speedX;
+                    }
+
+                    if (ball.x - ball.radius <= 0) {
+                        ball.x = ball.radius;
+                        ball.speedX = -ball.speedX;
+                    }
+
+                    if (ball.y + ball.radius >= canvas.height) {
+                        ball.y = canvas.height - ball.radius;
+                        ball.speedY = -ball.speedY;
+                    }
+
+                    if (ball.y - ball.radius <= 0) {
+                        ball.y = ball.radius;
+                        ball.speedY = -ball.speedY;
+                    }
+                });
+
+                drawBalls();
+                requestAnimationFrame(moveBalls);
+            }
+
+            moveBalls();
+
+            window.addEventListener('resize', () => {
+                canvas.width = 700; // Maintain fixed width on resize
+                canvas.height = 700; // Maintain fixed height on resize
+            });
+        }
+
+        setupCanvas(); // Call the setup function
+    </script>
+</body>
+</html>
